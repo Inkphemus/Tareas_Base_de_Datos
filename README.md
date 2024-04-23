@@ -1,2 +1,2 @@
 # Tareas_Base_de_Datos
-Git para las tareas de base de datos
+Este repositorio será para las todas las tareas de la asignatura. Integrantes: Fabián Clavijo - Sebastián Cornejo - Tomás Ramdohr
