@@ -114,6 +114,65 @@ async function end_03(dt)
   	else      { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
  	}
 
+//  ENDPOINT 04 : MARCAR
+async function end_04(dt)
+ 	{
+ 	let flag: boolean = true;
+  	let numb: number  = 0;
+ 	try
+    	{
+    	const dicc = dt.body;
+    	let dicc_aux = {"mail":dicc["mail"] , "pass":dicc["pass"]};
+    	let reg = await prisma.usuario.findMany({ where: dicc_aux, });
+    	if (reg.length===0) { flag = false; }
+    	else
+    		{
+    		let dicc_aux = { "id_usr" : parseInt(dicc["add"],10) };
+    		let reg = await prisma.usuario.findMany({ where: dicc_aux, });
+    		if (reg.length===0) { flag = false; }
+    		else
+    			{
+    			let dicc_aux = { "id_usr" : reg[0]["id_usr"] };
+    			try { await prisma.fav.create({ data:dicc_aux, }); }
+    			catch (error) { flag = false; }
+    			}
+    		}
+    	}
+  	catch (error) { flag = false; }
+
+  	if (flag) { console.log('EXITO'); }
+  	else      { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
+ 	}
+
+//  ENDPOINT 05 : DE-MARCAR
+async function end_05(dt)
+ 	{
+ 	let flag: boolean = true;
+  	let numb: number  = 0;
+ 	try
+    	{
+    	const dicc = dt.body;
+    	let dicc_aux = {"mail":dicc["mail"] , "pass":dicc["pass"]};
+    	let reg = await prisma.usuario.findMany({ where: dicc_aux, });
+    	if (reg.length===0) { flag = false; }
+    	else
+    		{
+    		let dicc_aux = { "id_usr" : parseInt(dicc["add"],10) };
+    		let reg = await prisma.usuario.findMany({ where: dicc_aux, });
+    		if (reg.length===0) { flag = false; }
+    		else
+    			{
+    			let dicc_aux = { "id_usr" : reg[0]["id_usr"] };
+    			try { await prisma.fav.delete({ data:dicc_aux, }); }
+    			catch (error) { flag = false; }
+    			}
+    		}
+    	}
+  	catch (error) { flag = false; }
+
+  	if (flag) { console.log('EXITO'); }
+  	else      { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
+ 	}
 
 
 //  ELYSIA ENDPOINTS 
