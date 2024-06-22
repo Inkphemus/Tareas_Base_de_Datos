@@ -1,5 +1,5 @@
 import requests
-url_root = "http://localhost:3000/api"
+url_root = "http://localhost:6969/api"
 
 def setup():
     print("**** *** ** BIENBENIDO A CommuniKen ** *** ****")
@@ -68,6 +68,35 @@ def srv_03():
     ss = rr.status_code
     print(ss,"\n",rr.text)
 
+## SERVICOS 4 : MARCAR CORREO
+def srv_04():
+    url = url_root + "/marcarcorreo"
+    i1 = input("mail: ")
+    i2 = input("pass: ")
+    i3 = input("add: ")
+    dat = {"mail":i1 , "pass":i2 , "add":i3 }
+    rr = requests.post(url,dat)
+    ss = rr.status_code
+    print(ss,rr.text)
+
+## SERVICOS 5 : DE-MARCAR CORREO
+def srv_05():
+    url = url_root + "/desmarcarcorreo"
+    i1 = input("mail: ")
+    i2 = input("pass: ")
+    i3 = input("del: ")
+    dat = {"mail":i1 , "pass":i2 , "del":i3 }
+    rr = requests.post(url,dat)
+    ss = rr.status_code
+    print(ss,rr.text)
+
+## SERVICOS 6 : VER FAV 'S
+def srv_06():
+    url = url_root + "/verfavs"
+    rr = requests.get(url)
+    ss = rr.status_code
+    print(ss,"\n",rr.text)
+
 def main():
     tup = setup()
     if srv_00(tup) == True:
@@ -76,26 +105,39 @@ def main():
 
         while op != "5":
             if   op == "1":
-                print("OPCION 1 ...")
-                srv_01()
+                print("[ 1 ] NO DISPONIBLE")
             elif op == "2":
-                print("OPCION 2 ...")
-                srv_02()
-            elif op == "3":
-                print("OPCION 3 ...")
+                print("[ 2 ] VER INFORMACION")
                 srv_03()
+            elif op == "3":
+                print("[ 3 ] VER FAVORITOS")
+                srv_06()
             elif op == "4":
-                print("OPCION 4 ...")
-                ## LOGIC OP 4
+                print("[ 4 ] MARCAR FAVORITO")
+                srv_04()
             else:
                 print("OPCION NO VALIDA, SELECCIONAR 1-5")
 
             loop()
             op = input("\nSELECCIONE UNA OPCION DE 1-5 ")
-
+            
+        print("[ 5 ] TERMINAR")
         print("¡Gracias por usar CommuniKen! Hasta luego.")
     else:
         print("¡Gracias por usar CommuniKen! Hasta luego.")
 
 if __name__ == "__main__":
     main()
+    ## TEST SERVICES
+    ## srv_00()
+    ## srv_01()
+    ## srv_04()
+    ## srv_03()
+    ## ...
+
+    ## AQUI SE PUEDEN PROBAR EN ORDEN VAROS SERVICIOS
+    ## TRAS APRETAR [5] O TERMINAR EL CLIENTE
+
+
+
+
