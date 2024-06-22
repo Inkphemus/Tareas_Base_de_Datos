@@ -97,22 +97,20 @@ async function end_02(dt)
   	else      { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
  	}
 
- //  ENDPOINT 03 : INFORMAR
+  //  ENDPOINT 03 : INFORMAR
 async function end_03(dt)
  	{
  	let flag: boolean = true;
-  	let numb: number  = 122323232321;
+ 	let dicc = {0:0};
  	try
     	{
-    	console.log(dt); /*
-    	let dicc_aux = {"mail":dicc["mail"] , "pass":dicc["pass"]};
+    	let dicc_aux = {"mail":dt};
     	let reg = await prisma.usuario.findMany({ where: dicc_aux, });
     	if (reg.length===0) { flag = false; }
-    	else {} */
+    	else                { dicc = reg[0]; }
     	}
   	catch (error) { flag = false; }
-
-  	if (flag) { console.log('EXITO'); return numb;}
+  	if (flag) { console.log('EXITO'); return dicc;}
   	else      { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
  	}
 
