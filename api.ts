@@ -174,6 +174,22 @@ async function end_05(dt)
   	else      { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
  	}
 
+//  ENDPOINT 08 : INFORMAR
+async function end_08(dt)
+ 	{
+ 	let flag: boolean = true;
+ 	let dicc = {0:0};
+ 	try
+    	{
+    	let reg = await prisma.fav.findMany();
+    	if (reg.length===0) { flag = false; }
+    	else                { dicc = reg; }
+    	}
+  	catch (error) { flag = false; }
+  	if (flag) { console.log('EXITO'); return dicc;}
+  	else      { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
+ 	}
+
 
 //  ELYSIA ENDPOINTS 
 const { Elysia } = require("C:\\Users\\asusr\\Desktop\\TAREA2\\myapp\\node_modules\\elysia");
