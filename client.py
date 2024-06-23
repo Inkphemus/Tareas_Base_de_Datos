@@ -31,7 +31,7 @@ def srv_00(tup):
     dat = {"mail":tup[0] , "pass":tup[1]}
     rr = requests.post(url,dat)
     ss = rr.status_code
-    print(ss)
+    print(rr.text)
     if ss == 200:
         return True
     else:
@@ -47,7 +47,7 @@ def srv_01():
     dat = {"nombre":i1 , "relato":i2 , "mail":i3 , "pass":i4 }
     rr = requests.post(url,dat)
     ss = rr.status_code
-    print(ss)
+    print(rr.text)
 
 ## SERVICOS 2 : BLOQUEAR USUARIO
 def srv_02():
@@ -58,7 +58,7 @@ def srv_02():
     dat = {"mail":i1 , "pass":i2 , "ban":i3 }
     rr = requests.post(url,dat)
     ss = rr.status_code
-    print(ss,rr.text)
+    print(rr.text)
 
 ## SERVICOS 3 : INFORMAR
 def srv_03():
@@ -66,7 +66,7 @@ def srv_03():
     url = url_root + "/informacion/" + mail
     rr = requests.get(url)
     ss = rr.status_code
-    print(ss,"\n",rr.text)
+    print(rr.text)
 
 ## SERVICOS 4 : MARCAR CORREO
 def srv_04():
@@ -77,7 +77,7 @@ def srv_04():
     dat = {"mail":i1 , "pass":i2 , "add":i3 }
     rr = requests.post(url,dat)
     ss = rr.status_code
-    print(ss,rr.text)
+    print(rr.text)
 
 ## SERVICOS 5 : DE-MARCAR CORREO
 def srv_05():
@@ -88,14 +88,14 @@ def srv_05():
     dat = {"mail":i1 , "pass":i2 , "del":i3 }
     rr = requests.delete(url,data=dat)
     ss = rr.status_code
-    print(ss,rr.text)
+    print(rr.text)
 
 ## SERVICOS 6 : VER FAV 'S
 def srv_06():
     url = url_root + "/verfavs"
     rr = requests.get(url)
     ss = rr.status_code
-    print(ss,"\n",rr.text)
+    print(rr.text)
 
 def main():
     tup = setup()
@@ -140,9 +140,4 @@ if __name__ == "__main__":
 
     ## AQUI SE PUEDEN PROBAR EN ORDEN VAROS SERVICIOS
     ## TRAS APRETAR [5] O TERMINAR EL CLIENTE
-
-
-
-
-
 
