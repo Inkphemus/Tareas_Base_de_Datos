@@ -237,7 +237,8 @@ async function end_06(er)
 
 
 //  ELYSIA ENDPOINTS 
-const { Elysia } = require("C:\\Users\\asusr\\Desktop\\TAREA2\\myapp\\node_modules\\elysia");
+// const { Elysia } = require("C:\\Users\\asusr\\Desktop\\TAREA2\\myapp\\node_modules\\elysia"); EN CASO DE OTRA UBICACION
+const { Elysia } = require("elysia");
 const server = new Elysia();
 
 //  ENDPOINT 00
