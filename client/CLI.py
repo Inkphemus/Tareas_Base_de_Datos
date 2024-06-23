@@ -1,5 +1,5 @@
 import requests
-url_root = "http://localhost:6969/api"
+url_root = "http://localhost:3000/api"
 
 def setup():
     print("**** *** ** BIENBENIDO A CommuniKen ** *** ****")
