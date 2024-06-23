@@ -157,13 +157,13 @@ async function end_05(dt)
     	if (reg.length===0) { flag = false; }
     	else
     		{
-    		let dicc_aux = { "id_usr" : parseInt(dicc["add"],10) };
+    		let dicc_aux = { "id_usr" : parseInt(dicc["del"],10) };
     		let reg = await prisma.usuario.findMany({ where: dicc_aux, });
     		if (reg.length===0) { flag = false; }
     		else
     			{
     			let dicc_aux = { "id_usr" : reg[0]["id_usr"] };
-    			try { await prisma.fav.delete({ data:dicc_aux, }); }
+    			try { await prisma.fav.deleteMany({ where:dicc_aux, }); }
     			catch (error) { flag = false; }
     			}
     		}
@@ -174,7 +174,7 @@ async function end_05(dt)
   	else      { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
  	}
 
-//  ENDPOINT 08 : INFORMAR
+//  ENDPOINT 08 : MOSTRAR
 async function end_08(dt)
  	{
  	let flag: boolean = true;
