@@ -1,5 +1,5 @@
 import requests
-url_root = "http://localhost:6969/api"
+url_root = "http://localhost:3000/api"
 
 def setup():
     print("**** *** ** BIENBENIDO A CommuniKen ** *** ****")
@@ -131,12 +131,17 @@ if __name__ == "__main__":
     ## TEST SERVICES
     ## srv_00()
     ## srv_01()
-    ## srv_04()
+    ## srv_02()
     ## srv_03()
+    ## srv_04()
+    ## srv_05()
+    ## srv_06()
     ## ...
 
     ## AQUI SE PUEDEN PROBAR EN ORDEN VAROS SERVICIOS
     ## TRAS APRETAR [5] O TERMINAR EL CLIENTE
+
+
 
 
 
