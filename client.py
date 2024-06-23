@@ -86,7 +86,7 @@ def srv_05():
     i2 = input("pass: ")
     i3 = input("del: ")
     dat = {"mail":i1 , "pass":i2 , "del":i3 }
-    rr = requests.post(url,dat)
+    rr = requests.delete(url,data=dat)
     ss = rr.status_code
     print(ss,rr.text)
 
