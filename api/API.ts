@@ -266,7 +266,7 @@ server.get( '/api/verfavs' , (error) => end_06(error) );
 //await prisma.fav.deleteMany({ where:{"id_fav":1}, });
 //await prisma.ban.deleteMany({ where:{"id_ban":1}, });
 
-server.listen(6969);
+server.listen(3000);
 console.log('run...');
 
 
