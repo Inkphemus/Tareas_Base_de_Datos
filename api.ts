@@ -10,7 +10,7 @@ model usuario {
   id_usr Int    @id @default(autoincrement())
   nombre String
   relato String
-  mail   String
+  mail   String @unique
   pass   String
   ban    ban[]
   fav    fav[]
@@ -18,13 +18,13 @@ model usuario {
 
 model fav {
   id_fav  Int     @id @default(autoincrement())
-  id_usr  Int
+  id_usr  Int     @unique
   usuario usuario @relation(fields: [id_usr], references: [id_usr])
 }
 
 model ban {
   id_ban  Int     @id @default(autoincrement())
-  id_usr  Int
+  id_usr  Int     @unique
   usuario usuario @relation(fields: [id_usr], references: [id_usr])
 }
 
@@ -48,8 +48,8 @@ async function end_00(dt)
     	}
   	catch (error) { flag = false; }
 
-  	if (flag) { console.log('EXITO'); }
-  	else      { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
+  	if (flag && numb>0) { console.log('EXITO'); }
+  	else                { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
  	}
 
 //  ENDPOINT 01 : REGISTRAR
@@ -59,7 +59,8 @@ async function end_01(dt)
  	try
     	{
     	const dicc = dt.body;
-    	await prisma.usuario.create({ data:dicc, });
+    	try { await prisma.usuario.create({ data:dicc, }) }
+    	catch (error) { flag = false; }
     	}
   	catch (error) { flag = false; }
 
@@ -97,7 +98,7 @@ async function end_02(dt)
   	else      { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
  	}
 
-  //  ENDPOINT 03 : INFORMAR
+ //  ENDPOINT 03 : INFORMAR
 async function end_03(dt)
  	{
  	let flag: boolean = true;
@@ -170,12 +171,12 @@ async function end_05(dt)
     	}
   	catch (error) { flag = false; }
 
-  	if (flag) { console.log('EXITO'); }
+  	if (flag) { console.log('EXITO'); return 0; }
   	else      { console.log('ERROR'); dt.sendResponse(500, 'server_bad'); }
  	}
 
-//  ENDPOINT 08 : MOSTRAR
-async function end_08(dt)
+//  ENDPOINT 06 : MOSTRAR
+async function end_06(dt)
  	{
  	let flag: boolean = true;
  	let dicc = {0:0};
@@ -211,23 +212,15 @@ server.get( '/api/informacion/:correo' , ({ params: { correo } }) => end_03(corr
 server.post( '/api/marcarcorreo' , (dt) => end_04(dt) );
 
 //  ENDPOINT 05
-server.post( '/api/desmarcarcorreo' , (dt) => end_05(dt) );
+server.delete( '/api/desmarcarcorreo' , (dt) => end_05(dt) );
 
 //  ENDPOINT 06
-//server.post( '/api/desregistar' , (dt) => end_06(dt) );
+server.get( '/api/verfavs' , (dt) => end_06(dt) );
 
-//  ENDPOINT 07
-//server.post( '/api/desbloquear' , (dt) => end_07(dt) );
-
-//  ENDPOINT 08
-server.post( '/api/verfavs' , (dt) => end_08(dt) );
-
-//  ENDPOINT 09
-//server.post( '/api/verusrs' , (dt) => end_09(dt) );
-
-//  ENDPOINT 10
-//server.post( '/api/verbans' , (dt) => end_10(dt) );
-
+// DES-REGISTRO DES-BLOQUEO DES-FAVORITO
+//await prisma.usuario.deleteMany({ where:{"id_usr":2}, });
+//await prisma.fav.deleteMany({ where:{"id_fav":1}, });
+//await prisma.ban.deleteMany({ where:{"id_ban":1}, });
 
 server.listen(3000);
 console.log('run...');
