@@ -6,6 +6,15 @@
 
 //  SCHEMA PRISMA UTILIZADO A CONTINUACION EN ESTE COMENTARIO
 
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model usuario {
   id_usr Int    @id @default(autoincrement())
   nombre String
